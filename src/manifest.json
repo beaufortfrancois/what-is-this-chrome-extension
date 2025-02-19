@@ -1,0 +1,17 @@
+{
+  "name": "What is this?",
+  "description": "Speak the image's generated description",
+  "version": "0.1",
+  "icons": {
+    "128": "assets/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "contextMenus",
+    "scripting",
+    "activeTab"
+  ],
+  "manifest_version": 3
+}
