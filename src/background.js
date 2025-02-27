@@ -21,8 +21,11 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 async function generateAltText(srcUrl) {
-  const image = document.querySelector(`[src="${srcUrl}"]`);
-  const session = await window.ai.languageModel.create();
+  let image = document.querySelector(`[src="${srcUrl}"]`);
+  if (!image) {
+    image = await (await fetch(srcUrl)).blob();
+  }
+  const session = await ai.languageModel.create();
   const content = await createImageBitmap(image);
   const prompt = "Generate a very short alt text for this image.";
   const response = await session.prompt([prompt, { type: "image", content }]);
