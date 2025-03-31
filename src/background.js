@@ -25,7 +25,9 @@ async function generateAltText(srcUrl) {
   if (!image) {
     image = await (await fetch(srcUrl)).blob();
   }
-  const session = await ai.languageModel.create();
+  const session = await LanguageModel.create({
+    expectedInputs: [{ type: "image" }],
+  });
   const content = await createImageBitmap(image);
   const prompt = "Generate a very short alt text for this image.";
   const response = await session.prompt([prompt, { type: "image", content }]);
